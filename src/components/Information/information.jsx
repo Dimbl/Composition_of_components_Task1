@@ -1,30 +1,11 @@
 import PropTypes from 'prop-types';
+import { InformationLayout } from './information-layout';
 
-const InformationLayout = ({ gameEnded }) => {
-	return <div>{gameEnded()}</div>;
-};
-
-InformationLayout.propTypes = {
-	gameEnded: PropTypes.func,
-};
-
-export const Information = ({ currentPlayer, isGameEnded, isDraw }) => {
-	const gameEnded = () => {
-		if (isDraw && isGameEnded) {
-			return 'Ничья';
-		} else if (!isDraw && isGameEnded) {
-			return `Победа: ${currentPlayer}`;
-		} else if (!isDraw && !isGameEnded) {
-			return `Ходит: ${currentPlayer}`;
-		}
-	};
-
-	return <InformationLayout gameEnded={gameEnded} />;
+export const Information = ({ gameEnded }) => {
+	const information = gameEnded();
+	return <InformationLayout information={information} />;
 };
 
 Information.propTypes = {
-	currentPlayer: PropTypes.string,
-	setCurrentPlayer: PropTypes.func,
-	isGameEnded: PropTypes.bool,
-	isDraw: PropTypes.bool,
+	gameEnded: PropTypes.func,
 };
